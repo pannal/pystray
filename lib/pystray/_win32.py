@@ -170,7 +170,12 @@ class Icon(_base.Icon):
         is registered and this is a right button click, the popup menu will be
         displayed.
         """
-        if lparam == win32.WM_LBUTTONDOWN:
+        if self.ICON_CLICK_TYPE == "default":
+            left_action = win32.WM_LBUTTONDOWN
+        else:
+            left_action = self.ICON_CLICK_TYPE
+            
+        if lparam == left_action:
             self()
 
         elif self._menu_handle and lparam == win32.WM_RBUTTONDOWN:
